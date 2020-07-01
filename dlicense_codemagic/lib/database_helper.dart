@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 class DatabaseHelper {
  
   Map<String, dynamic> rowclass;
-  static final _databaseName = "MyDatabase.db";
+  static final _databasec = "MyData.db";
   static final _databaseVersion = 1;
 
   
@@ -59,7 +59,7 @@ static final typeNameid = 'id';
   // this opens the database (and creates it if it doesn't exist)
   _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, _databaseName);
+    String path = join(documentsDirectory.path, _databasec);
     return await openDatabase(path,
         version: _databaseVersion,
         onCreate: _onCreate);
