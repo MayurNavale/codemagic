@@ -117,8 +117,8 @@ class _AllDataa extends State<AllDataa> {
       DatabaseHelper.countryCode   : countryNames,
         DatabaseHelper.countryPhone   : countryPhones,
     };
-    final id = await dbHelper.insertcountriesdatatable(row);
-    print('inserted row id: $countryids');
+    final countryid = await dbHelper.insertcountriesdatatable(row);
+    print('inserted row id: $countryid');
   }
   //  void _insertclassb(String name , int ids ) async {
 

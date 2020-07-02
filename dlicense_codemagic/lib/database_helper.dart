@@ -14,9 +14,9 @@ class DatabaseHelper {
   static final countriesdatatable = 'countriesdata';
   static final licenseclassdatatable = 'licenseclassdata';
   static final licensecodesdatatable = 'licensecodesdata';
-  static final licensetitlesdatatable='countries_name';
-  static final licensetypedata='countries_name';
-  static final statedatatable='countries_name';
+  static final licensetitlesdatatable='licensetitlesdata';
+  static final licensetypedatatable='licensetypedata';
+  static final statedatatable='statedata';
 
 
 
@@ -88,7 +88,7 @@ static final typeNameid = 'id';
             $titleid INTEGER PRIMARY KEY,
             $title TEXT NOT NULL
           ) ''');
-     await db.execute(''' CREATE TABLE $licensetypedata (
+     await db.execute(''' CREATE TABLE $licensetypedatatable (
             $typeNameid INTEGER PRIMARY KEY,
             $typeName TEXT NOT NULL
           ) ''');
@@ -128,7 +128,7 @@ static final typeNameid = 'id';
   }
    Future<int> insertlicensetypedatatable(  Map<String, dynamic> row) async {
     Database db = await instance.database;
-    return await db.insert(licensetypedata, rowclass);
+    return await db.insert(licensetypedatatable, rowclass);
   }
    Future<int> insertstatedatatable( Map<String, dynamic> row) async {
     Database db = await instance.database;
@@ -155,7 +155,7 @@ static final typeNameid = 'id';
   }
    Future<List<Map<String, dynamic>>> querylicensetypedatatable() async {
     Database db = await instance.database;
-    return await db.query(licensetypedata);
+    return await db.query(licensetypedatatable);
   }
    Future<List<Map<String, dynamic>>> querystatedatatable() async {
     Database db = await instance.database;
