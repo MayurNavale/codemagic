@@ -92,7 +92,7 @@ class _AllDataa extends State<AllDataa> {
   // int count=countriesdata.length;
   //print(count);
   int dat,a=1,b=2,c,d;
-  String m='countryCode',n='countryName',s;
+  String m='IN',n='india',s;
   _insertcountriesdatatable(a,m,n,b);
    
   //   for(dat=0;dat<countriesdata.length;dat++){ 
@@ -114,8 +114,8 @@ class _AllDataa extends State<AllDataa> {
     Map<String, dynamic> row = {
       DatabaseHelper.countryid :countryids,
       DatabaseHelper.countryCode  : countryCodes,
-      DatabaseHelper.countryCode   : countryNames,
-        DatabaseHelper.countryPhone   : countryPhones,
+      DatabaseHelper.countryName   : countryNames,
+      DatabaseHelper.countryPhone   : countryPhones,
     };
     final countryid = await dbHelper.insertcountriesdatatable(row);
     print('inserted row id: $countryid');
