@@ -41,7 +41,11 @@ class DBProvider {
           'countryCode TEXT,'
           'countryName TEXT,'
           'countryPhone INTEGER NOT NULL,'
+          'id INTEGER PRIMARY KEY'
+          ')');
+            await db.execute('CREATE TABLE Doctor('
           'id INTEGER PRIMARY KEY,'
+          'doctorName TEXT'
           ')');
           await db.execute('CREATE TABLE Institution('
           'id INTEGER PRIMARY KEY,'
@@ -49,7 +53,7 @@ class DBProvider {
           ')');
             await db.execute('CREATE TABLE Language('
           'id INTEGER PRIMARY KEY,'
-          'languageName TEXT'
+          'language TEXT'
           ')');
             await db.execute('CREATE TABLE Class('
           'id INTEGER PRIMARY KEY,'
@@ -57,7 +61,7 @@ class DBProvider {
           ')');
             await db.execute('CREATE TABLE Code('
           'id INTEGER PRIMARY KEY,'
-          'CodeName TEXT'
+          'code TEXT'
           ')');
             await db.execute('CREATE TABLE Titleclass('
           'id INTEGER PRIMARY KEY,'
@@ -128,7 +132,7 @@ return res;
     return res;}
        titledb(Titleclass newstatedata) async {
      final db = await database;
-    final res = await db.insert('title', newstatedata.toJson());
+    final res = await db.insert('Titleclass', newstatedata.toJson());
     return res;}
        typeNamedb(Type newstatedata) async {
      final db = await database;
