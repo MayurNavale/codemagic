@@ -41,7 +41,7 @@ class DBProvider {
           'countryCode TEXT,'
           'countryName TEXT,'
           'countryPhone INTEGER NOT NULL,'
-          'id INTEGER PRIMARY KEY,'
+          'id INTEGER PRIMARY KEY'
           ')');
           await db.execute('CREATE TABLE Institution('
           'id INTEGER PRIMARY KEY,'
