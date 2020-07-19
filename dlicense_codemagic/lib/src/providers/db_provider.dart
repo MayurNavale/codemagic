@@ -43,13 +43,17 @@ class DBProvider {
           'countryPhone INTEGER NOT NULL,'
           'id INTEGER PRIMARY KEY'
           ')');
+            await db.execute('CREATE TABLE Doctor('
+          'id INTEGER PRIMARY KEY,'
+          'doctorName TEXT'
+          ')');
           await db.execute('CREATE TABLE Institution('
           'id INTEGER PRIMARY KEY,'
           'institutionName TEXT'
           ')');
             await db.execute('CREATE TABLE Language('
           'id INTEGER PRIMARY KEY,'
-          'languageName TEXT'
+          'language TEXT'
           ')');
             await db.execute('CREATE TABLE Class('
           'id INTEGER PRIMARY KEY,'
@@ -57,7 +61,7 @@ class DBProvider {
           ')');
             await db.execute('CREATE TABLE Code('
           'id INTEGER PRIMARY KEY,'
-          'CodeName TEXT'
+          'code TEXT'
           ')');
             await db.execute('CREATE TABLE Titleclass('
           'id INTEGER PRIMARY KEY,'
@@ -128,7 +132,7 @@ return res;
     return res;}
        titledb(Titleclass newstatedata) async {
      final db = await database;
-    final res = await db.insert('title', newstatedata.toJson());
+    final res = await db.insert('Titleclass', newstatedata.toJson());
     return res;}
        typeNamedb(Type newstatedata) async {
      final db = await database;
@@ -177,6 +181,8 @@ return res;
  print(airlinedatalist);
  final countriesdatalist = await db.rawQuery("SELECT * FROM COUNTRY");
  print(countriesdatalist);
+     final doctordatalist = await db.rawQuery("SELECT * FROM DOCTOR");
+ print(doctordatalist);
  final institutiondatalist = await db.rawQuery("SELECT * FROM INITITUTION");
  print(institutiondatalist);
  final languagedatalist = await db.rawQuery("SELECT * FROM LANGUAGE");
@@ -187,6 +193,10 @@ return res;
  print(licensecodesdatalist);
  final licensetypedatalist = await db.rawQuery("SELECT * FROM TYPE");
  print(licensetypedatalist);
+    
+       final licensetitlesdatalist = await db.rawQuery("SELECT * FROM TITLECLASS");
+ print(licensetitlesdatalist);
+  
  final limitationdatalist = await db.rawQuery("SELECT * FROM LIMITATION");
  print(limitationdatalist);
  final ministrydatalist = await db.rawQuery("SELECT * FROM MINISTRY");
