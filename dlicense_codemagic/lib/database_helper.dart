@@ -1,197 +1,239 @@
-import 'dart:io';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-// import 'model.dart';
-
-class DatabaseHelper {
- 
-  Map<String, dynamic> rowclass;
-  static final _databasec = "MyData.db";
-  static final _databaseVersion = 1;
-
-  
-  static final countriesdatatable = 'countriesdata';
-  static final licenseclassdatatable = 'licenseclassdata';
-  static final licensecodesdatatable = 'licensecodesdata';
-  static final licensetitlesdatatable='licensetitlesdata';
-  static final licensetypedatatable='licensetypedata';
-  static final statedatatable='statedata';
 
 
+import 'dart:convert';
+ List countriesdata = [];
+    List licenseclassdata=[];
+  List licensecodesdata=[];
+  List licensetitlesdata=[];
+  List licensetypedata=[];
+  List statedata=[];
 
-  static final countryid = 'id';
-  static final countryCode = 'countryCode';
-    static final countryName = 'countryName';
-  static final countryPhone = 'countryPhone';
+  List apidata = [];
+  //String classOptions;
+   List classdata = [];
+  List<Map<String, dynamic>> planet ;
+  List planetX = [];List planetB = [];
+  List filteredCountries = [];
+  //List planetList = ["planet", "Venus", "Earth"];
 
-  
-  static final classNameid = 'id';
-  static final className = 'className';
 
-   static final codeid = 'id';
-  static final code = 'code';
- 
- 
-   static final titleid = 'id';
-  static final title = 'title';
-
-static final typeNameid = 'id';
-  static final typeName = 'typeName';
-
-   static final statecountryid = 'id';
-  static final stateName = 'stateName';
-  static final countryId = 'countryId';
-
-  // make this a singleton class
-  DatabaseHelper._privateConstructor();
-  static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
-
-  // only have a single app-wide reference to the database
-  static Database _database;
-  Future<Database> get database async {
-    if (_database != null) return _database;
-    // lazily instantiate the db the first time it is accessed
-    _database = await _initDatabase();
-    return _database;
+  List<Map<String, dynamic>> countriesdatalist=[
+  {
+    "id": 1,
+    "countryName": "AF",
+    "countryCode": "Afghanistan",
+    "countryPhone": 93
+  },
+  {
+    "id": 2,
+    "countryName": "AL",
+    "countryCode": "Albania",
+    "countryPhone": 355
+  },
+  {
+    "id": 3,
+    "countryName": "DZ",
+    "countryCode": "Algeria",
+    "countryPhone": 213
+  },
+  {
+    "id": 4,
+    "countryName": "AS",
+    "countryCode": "American Samoa",
+    "countryPhone": 1684
   }
-  
-  // this opens the database (and creates it if it doesn't exist)
-  _initDatabase() async {
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, _databasec);
-    return await openDatabase(path,
-        version: _databaseVersion,
-        onCreate: _onCreate);
-  }
+];
 
-  // SQL code to create the database table
-  Future _onCreate(Database db, int version) async {
-    
-    await db.execute('''
-          CREATE TABLE $countriesdatatable (
-            $countryid INTEGER PRIMARY KEY,
-            $countryCode TEXT NOT NULL,
-            $countryName TEXT NOT NULL,
-            $countryPhone INTEGER NOT NULL
-          )
-          ''');
-    await db.execute(''' CREATE TABLE $licenseclassdatatable (
-            $classNameid INTEGER PRIMARY KEY,
-            $className TEXT NOT NULL
-          ) ''');
-    await db.execute(''' CREATE TABLE $licensecodesdatatable (
-            $codeid INTEGER PRIMARY KEY,
-            $code TEXT NOT NULL
-          ) ''');
-     await db.execute(''' CREATE TABLE $licensetitlesdatatable (
-            $titleid INTEGER PRIMARY KEY,
-            $title TEXT NOT NULL
-          ) ''');
-     await db.execute(''' CREATE TABLE $licensetypedatatable (
-            $typeNameid INTEGER PRIMARY KEY,
-            $typeName TEXT NOT NULL
-          ) ''');
-     await db.execute('''
-          CREATE TABLE $statedatatable (
-            $statecountryid INTEGER PRIMARY KEY,
-            $stateName TEXT NOT NULL,
-            $countryId TEXT NOT NULL
-          )
-          ''');
-           
-  }
+    int licenceNumber;
+     int licenceCodeOptionsid; 
+    String _color;
+    bool ir = false;
+    bool co_Pilot = false;
+    bool additionalratingcoPilot=false;
+    bool additionalratingIR=false;
+    bool loaded=false;
 
-         
-  // Helper methods
+DateTime _dateTime;
+    String dt_irtest;
+    String licence_Number;
+    String countryCodes;
+    String _class;
+    String tpyeOptionData;
+    String classOptions;
+    String examinarRemarksandRestrictions;
+    String ratingcertificateendorsement;
+    String additionalratingtpyeOptionData;
+    String instructorremarksandRestrictions;
+   
+    var contries;
+    var licenceCodeOptions;
+    var titleOfLicenceOptions;
+    var dateofratingtest;
+    var dateOfInitialIssue;
+    var dateofIRtest;
+    var examiners;
+    var additionalLicenceNumber;
+    var validuntil;
+    var examinerscertificatenumber;
+    var instructorsOptions;
+    var remarksandRestrictions; 
+    var addtiionalratingclassOptions;
+Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+String welcomeToJson(Welcome data) => json.encode(data.toJson());
 
- 
+class Welcome {
+    Welcome({
+        this.additionalRemarks,
+        this.codeId,
+        this.dt_irtest,
+        this.dt_issue,
+        this.dt_ratingtest,
+        this.dt_validity,
+        this.examinerCodeId,
+        this.examinerNumber,
+        this.id,
+        this.issuedBy,
+        this.licenseDetails,
+        this.licenseNumber,
+        this.personnel,
+        this.ratingCertId,
+        this.remarks,
+        this.stateId,
+        this.titleId,
+    });
+  String additionalRemarks;
+  int codeId;
+  String dt_irtest;
+  String dt_issue;
+  String dt_ratingtest;
+  String dt_validity;
+  int examinerCodeId;
+  int examinerNumber;
+  int id;
+  int issuedBy;
+  List<LicenseDetail> licenseDetails;
+  int licenseNumber;
+  List<Personnel> personnel;
+  String ratingCertId;
+  String remarks;
+  int stateId;
+  int titleId;
 
-  // Inserts a row in the database where each key in the Map is a column name
-  // and the value is the column value. The return value is the id of the
-  // inserted row.
-  Future<int> insertcountriesdatatable(  Map<String, dynamic> row) async {
-    Database db = await instance.database;
-    return await db.insert(countriesdatatable, row);
-  }
- Future<int> insertlicenseclassdatatable(  Map<String, dynamic> row) async {
-    Database db = await instance.database;
-    return await db.insert(licenseclassdatatable, rowclass);
-  }
-   Future<int> insertlicensecodesdatatable(  Map<String, dynamic> row) async {
-    Database db = await instance.database;
-    return await db.insert(licensecodesdatatable, rowclass);
-  }
-  Future<int> insertlicensetitlesdatatable( Map<String, dynamic> row) async {
-    Database db = await instance.database;
-    return await db.insert(licensetitlesdatatable, rowclass);
-  }
-   Future<int> insertlicensetypedatatable(  Map<String, dynamic> row) async {
-    Database db = await instance.database;
-    return await db.insert(licensetypedatatable, rowclass);
-  }
-   Future<int> insertstatedatatable( Map<String, dynamic> row) async {
-    Database db = await instance.database;
-    return await db.insert(statedatatable, rowclass);
-  }
-  // All of the rows are returned as a list of maps, where each map is 
-  // a key-value list of columns.
-  Future<List<Map<String, dynamic>>> querycountriesdatatable() async {
-    Database db = await instance.database;
-    return await db.query(countriesdatatable);
-  }
+    factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+        additionalRemarks: json["additionalRemarks"] == null ? null : json["additionalRemarks"],
+        codeId: json["codeId"] == null ? null : json["codeId"],
+        dt_irtest: json["dt_irtest"] == null ? null : json["dt_irtest"],
+        dt_issue: json["dt_issue"] == null ? null : json["dt_issue"],
+        dt_ratingtest: json["dt_ratingtest"] == null ? null : json["dt_ratingtest"],
+        dt_validity: json["dt_validity"] == null ? null : json["dt_validity"],
+        examinerCodeId: json["examinerCodeId"] == null ? null : json["examinerCodeId"],
+        examinerNumber: json["examinerNumber"] == null ? null : json["examinerNumber"],
+        id: json["id"] == null ? null : json["id"],
+        issuedBy: json["issuedBy"] == null ? null : json["issuedBy"],
+        licenseDetails: json["licenseDetails"] == null ? null : List<LicenseDetail>.from(json["licenseDetails"].map((x) => LicenseDetail.fromJson(x))),
+        licenseNumber: json["licenseNumber"] == null ? null : json["licenseNumber"],
+        personnel: json["personnel"] == null ? null : List<Personnel>.from(json["personnel"].map((x) => Personnel.fromJson(x))),
+        ratingCertId: json["ratingCertId"] == null ? null : json["ratingCertId"],
+        remarks: json["remarks"] == null ? null : json["remarks"],
+        stateId: json["stateId"] == null ? null : json["stateId"],
+        titleId: json["titleId"] == null ? null : json["titleId"],
+    );
 
-    Future<List<Map<String, dynamic>>> querylicenseclassdatatable() async {
-    Database db = await instance.database;
-    return await db.query(licenseclassdatatable);
-  }
-   Future<List<Map<String, dynamic>>> querylicensecodesdatatable() async {
-    Database db = await instance.database;
-    return await db.query(licensecodesdatatable);
-  }
-   Future<List<Map<String, dynamic>>> querylicensetitlesdatatable() async {
-    Database db = await instance.database;
-    return await db.query(licensetitlesdatatable);
-  }
-   Future<List<Map<String, dynamic>>> querylicensetypedatatable() async {
-    Database db = await instance.database;
-    return await db.query(licensetypedatatable);
-  }
-   Future<List<Map<String, dynamic>>> querystatedatatable() async {
-    Database db = await instance.database;
-    return await db.query(statedatatable);
-  }
-  //  Future<int> insertclassb(Map<String, dynamic> rowclassdata) async {
-  //   Database db = await instance.database;
-  //   return await db.insert(tableclassb, rowclassdata);
-  // }
-  // // All of the rows are returned as a list of maps, where each map is 
-  // // a key-value list of columns.
-  // Future<List<Map<String, dynamic>>> queryAllRowsclassb() async {
-  //   Database db = await instance.database;
-  //   return await db.query(tableclassb);
-  // }
+    Map<String, dynamic> toJson() => {
+        "additionalRemarks": additionalRemarks == null ? null : additionalRemarks,
+        "codeId": codeId == null ? null : codeId,
+        "dt_irtest": dt_irtest == null ? null : dt_irtest,
+        "dt_issue": dt_issue == null ? null : dt_issue,
+        "dt_ratingtest": dt_ratingtest == null ? null : dt_ratingtest,
+        "dt_validity": dt_validity == null ? null : dt_validity,
+        "examinerCodeId": examinerCodeId == null ? null : examinerCodeId,
+        "examinerNumber": examinerNumber == null ? null : examinerNumber,
+        "id": id == null ? null : id,
+        "issuedBy": issuedBy == null ? null : issuedBy,
+        "licenseDetails": licenseDetails == null ? null : List<dynamic>.from(licenseDetails.map((x) => x.toJson())),
+        "licenseNumber": licenseNumber == null ? null : licenseNumber,
+        "personnel": personnel == null ? null : List<dynamic>.from(personnel.map((x) => x.toJson())),
+        "ratingCertId": ratingCertId == null ? null : ratingCertId,
+        "remarks": remarks == null ? null : remarks,
+        "stateId": stateId == null ? null : stateId,
+        "titleId": titleId == null ? null : titleId,
+    };
+}
+
+class LicenseDetail {
+    LicenseDetail({
+        this.additionalRating,
+        this.classId,
+        this.copilot,
+        this.id,
+        this.ir,
+        this.typeId,
+    });
+
+    bool additionalRating;
+    int  classId;
+    bool copilot;
+    int  id;
+    bool ir;
+    int  typeId;
+
+    factory LicenseDetail.fromJson(Map<String, dynamic> json) => LicenseDetail(
+        additionalRating: json["additionalRating"] == null ? null : json["additionalRating"],
+        classId: json["classId"] == null ? null : json["classId"],
+        copilot: json["copilot"] == null ? null : json["copilot"],
+        id: json["id"] == null ? null : json["id"],
+        ir: json["ir"] == null ? null : json["ir"],
+        typeId: json["typeId"] == null ? null : json["typeId"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "additionalRating": additionalRating == null ? null : additionalRating,
+        "classId": classId == null ? null : classId,
+        "copilot": copilot == null ? null : copilot,
+        "id": id == null ? null : id,
+        "ir": ir == null ? null : ir,
+        "typeId": typeId == null ? null : typeId,
+    };
+}
+
+class Personnel {
+    Personnel({
+        this.id,
+        this.idUser,
+        this.personnelType,
+        this.remarks,
+    });
+
+    int id;
+    String idUser;
+    String personnelType;
+    String remarks;
+
+    factory Personnel.fromJson(Map<String, dynamic> json) => Personnel(
+        id: json["id"] == null ? null : json["id"],
+        idUser: json["idUser"] == null ? null : json["idUser"],
+        personnelType: json["personnelType"] == null ? null : json["personnelType"],
+        remarks: json["remarks"] == null ? null : json["remarks"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id == null ? null : id,
+        "idUser": idUser == null ? null : idUser,
+        "personnelType": personnelType == null ? null : personnelType,
+        "remarks": remarks == null ? null : remarks,
+    };
+}
 
 
-  // All of the methods (insert, query, update, delete) can also be done using
-  // // raw SQL commands. This method uses a raw query to give the row count.
-  // Future<int> queryRowCount() async {
-  //   Database db = await instance.database;
-  //   return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $countriesdatatable'));
-  // }
 
-  // We are assuming here that the id column in the map is set. The other 
-  // column values will be used to update the row.
-  // Future<int> update(Map<String, dynamic> row) async {
-  //   Database db = await instance.database;
-  //   int id = row[columnId];
-  //   return await db.update(table, row, where: '$columnId = ?', whereArgs: [id]);
-  // }
 
-  // Deletes the row specified by the id. The number of affected rows is 
-  // returned. This should be 1 as long as the row exists.
-  // Future<int> delete(int id) async {
-  //   Database db = await instance.database;
-  //   return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
-  // }
+
+void shoe(
+ Welcome saveLicenseData,
+ LicenseDetail licenseDetail,
+ Personnel personal){
+ saveLicenseData.personnel = <Personnel>[personal];
+ saveLicenseData.licenseDetails = <LicenseDetail>[licenseDetail];
+ String jsons = welcomeToJson(saveLicenseData);
+ print( jsons);
 }
