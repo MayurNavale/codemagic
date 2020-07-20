@@ -190,7 +190,11 @@ return res;
  print(countriesdatalist);
      final doctordatalist = await db.rawQuery("SELECT * FROM DOCTOR");
  print(doctordatalist);
+<<<<<<< HEAD
  final institutiondatalist = await db.rawQuery("SELECT * FROM INSTITUTION");
+=======
+ final institutiondatalist = await db.rawQuery("SELECT * FROM INITITUTION");
+>>>>>>> 1d10233c74af5e344dfd40d8a57908f0c9884482
  print(institutiondatalist);
  final languagedatalist = await db.rawQuery("SELECT * FROM LANGUAGE");
  print(languagedatalist);
@@ -200,8 +204,15 @@ return res;
  print(licensecodesdatalist);
  final licensetypedatalist = await db.rawQuery("SELECT * FROM TYPE");
  print(licensetypedatalist);
+<<<<<<< HEAD
 final licensetitlesdatalist = await db.rawQuery("SELECT * FROM TITLECLASS");
  print(licensetitlesdatalist);
+=======
+    
+       final licensetitlesdatalist = await db.rawQuery("SELECT * FROM TITLECLASS");
+ print(licensetitlesdatalist);
+  
+>>>>>>> 1d10233c74af5e344dfd40d8a57908f0c9884482
  final limitationdatalist = await db.rawQuery("SELECT * FROM LIMITATION");
  print(limitationdatalist);
  final ministrydatalist = await db.rawQuery("SELECT * FROM MINISTRY");
