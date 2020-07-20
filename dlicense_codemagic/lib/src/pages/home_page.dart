@@ -1,3 +1,4 @@
+import 'package:dlicense_codemagic/src/pages/signinPage.dart';
 import 'package:dlicense_codemagic/src/providers/db_provider.dart';
 
 import 'package:dlicense_codemagic/src/providers/employee_api_provider.dart';
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.settings_input_antenna),
                onPressed: () { Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Licencepage()),
+                MaterialPageRoute(builder: (context) => RegisterUser()),
               );},
             ),
           ),
@@ -50,6 +51,28 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      drawer: Drawer(
+  child: ListView(
+    children: <Widget>[
+      ListTile(
+        title: Text("login"),
+        trailing: Icon(Icons.arrow_forward),
+        onTap: () { Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LogInPage()),
+              );},
+      ),
+      ListTile(
+        title: Text("register user"),
+        trailing: Icon(Icons.arrow_forward),
+        onTap:() { Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => RegisterUser()),
+              );} ,
+      ),
+    ],
+  ),
+),
       body: isLoading
           ? Center(
               child: CircularProgressIndicator(),

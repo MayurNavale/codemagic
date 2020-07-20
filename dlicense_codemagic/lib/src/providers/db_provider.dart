@@ -102,7 +102,6 @@ int countryId;
 return res;
   }
    airlinestatedb(Airline newstatedata) async {
-     airlinedatatabledelete();
      final db = await database;
     final res = await db.insert('Airlinedatatable', newstatedata.toJson());
     return res;}
@@ -163,16 +162,24 @@ return res;
   // Delete all employees
   Future<int> deleteAllEmployees() async {
     final db = await database;
-    final res = await db.rawDelete('DELETE FROM Statedatatable');
-
+    final resa = await db.rawDelete('DELETE FROM Statedatatable');
+    final resaa = await db.rawDelete('DELETE FROM Airlinedatatable');
+   final resas = await db.rawDelete('DELETE FROM Country');
+   final resaf = await db.rawDelete('DELETE FROM Doctor');
+   final resaq = await db.rawDelete('DELETE FROM Institution');
+   final resar = await db.rawDelete('DELETE FROM Language');
+   final resaw = await db.rawDelete('DELETE FROM Class');
+   final resay = await db.rawDelete('DELETE FROM Code');
+   final resaay= await db.rawDelete('DELETE FROM Titleclass');
+   final resap = await db.rawDelete('DELETE FROM Type');
+   final resai = await db.rawDelete('DELETE FROM Limitation');
+   final resau = await db.rawDelete('DELETE FROM Ministry');
+   final resafgh = await db.rawDelete('DELETE FROM Niveaulevel');
+    final res = await db.rawDelete('DELETE FROM School');
+   
     return res;
   }
-  Future<int> airlinedatatabledelete() async {
-    final db = await database;
-    final res = await db.rawDelete('DELETE FROM Airlinedatatable');
-
-    return res;
-  }
+ 
 
   Future<List<Stateclass>> getAlldata() async {
     final db = await database;
@@ -181,7 +188,9 @@ return res;
  print(airlinedatalist);
  final countriesdatalist = await db.rawQuery("SELECT * FROM COUNTRY");
  print(countriesdatalist);
- final institutiondatalist = await db.rawQuery("SELECT * FROM INITITUTION");
+     final doctordatalist = await db.rawQuery("SELECT * FROM DOCTOR");
+ print(doctordatalist);
+ final institutiondatalist = await db.rawQuery("SELECT * FROM INSTITUTION");
  print(institutiondatalist);
  final languagedatalist = await db.rawQuery("SELECT * FROM LANGUAGE");
  print(languagedatalist);
@@ -191,6 +200,8 @@ return res;
  print(licensecodesdatalist);
  final licensetypedatalist = await db.rawQuery("SELECT * FROM TYPE");
  print(licensetypedatalist);
+final licensetitlesdatalist = await db.rawQuery("SELECT * FROM TITLECLASS");
+ print(licensetitlesdatalist);
  final limitationdatalist = await db.rawQuery("SELECT * FROM LIMITATION");
  print(limitationdatalist);
  final ministrydatalist = await db.rawQuery("SELECT * FROM MINISTRY");

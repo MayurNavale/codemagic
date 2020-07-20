@@ -341,6 +341,7 @@ class School {
   List<Map<String, dynamic>> licenseclassdatalist=[]; 
   List<Map<String, dynamic>> licensecodesdatalist=[];
   List<Map<String, dynamic>> licensetitlesdatalist=[];
+  List<Map<String, dynamic>> titledatalist=[];
   List<Map<String, dynamic>> licensetypedatalist=[];
   List<Map<String, dynamic>> statedatalist=[];
   List<Map<String, dynamic>> airlinedatalist=[];
@@ -350,6 +351,8 @@ class School {
   List<Map<String, dynamic>> ministrydatalist=[];
   List<Map<String, dynamic>> niveauleveldatalist=[];
  List<Map<String, dynamic>> schooldatalist=[];
+ List<Map<String, dynamic>> doctordatalist=[];
+
 
     int licenceNumber;
      int licenceCodeOptionsid; 
