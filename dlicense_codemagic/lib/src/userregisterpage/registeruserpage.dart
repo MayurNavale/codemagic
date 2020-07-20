@@ -1,6 +1,8 @@
 
 import 'dart:convert';
 //import 'model.dart';
+import 'package:intl/intl.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'model.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter/material.dart';
@@ -10,7 +12,7 @@ class RegisterUser extends StatefulWidget {
 }
 
 class _RegisterUserState extends State<RegisterUser> {
-
+  final dateFormat = DateFormat("dd-MM-yyyy");
 
  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
  bool _autoValidate = false;
@@ -24,6 +26,7 @@ class _RegisterUserState extends State<RegisterUser> {
   int nilevel;
   String levelvalueanswer;
   String fromjsondata;
+  DateTime date2;
 //  email=userdata.lastName.toString();
   final TextEditingController _controller = new TextEditingController();
   Future<void> _selectDate(BuildContext context,var a,TextEditingController datecontroller ) async {
@@ -89,7 +92,7 @@ class _RegisterUserState extends State<RegisterUser> {
           onSaved: (String val)  =>saveUserData.lastName=val,
           ),
         
-        
+       
         
           _nationality(),
         _placeOfBirth(),
@@ -218,19 +221,26 @@ class _RegisterUserState extends State<RegisterUser> {
      }  
 //   /////////////
     Widget _dateOfBirth() {
-     return TextFormField(
-        initialValue:userdata.dateOfBirth,
-    //  controller: dtOfBirth,
-       
-      onTap : ()=>_selectDate(context,userdata.dateOfBirth,dtOfBirth),
-  onSaved:(val) => saveUserData.dateOfBirth= val.toString(),
-      decoration: InputDecoration(
-         suffixIcon : Icon(Icons.calendar_today),
-         //   border: OutlineInputBorder(),
-       labelText:' Date of Birth *',
-      hintText: ' $dateOfBirth',
-      ),
-    );
+     return DateTimeField(
+            //  dateOnly: true,
+            decoration: InputDecoration(labelText: 'Select Date',
+            suffixIcon : Icon(Icons.calendar_today),
+            hintText: '$date2'),
+            format: dateFormat,
+            initialValue:DateTime.parse(userdata.dateOfBirth),
+            onShowPicker: (context, currentValue) {
+                          return showDatePicker(
+                          context: context,
+                          firstDate: DateTime(1900),
+                          initialDate:  DateTime.now(),
+                          lastDate: DateTime(2100));
+                    },
+            validator: (val) {if (val != null) {return null; } else {return 'Date Field is Empty'; }},
+            onChanged: (dt) { setState(() => date2 = dt);
+                        print('Selected date: $date2');},
+            onSaved: (value) {debugPrint(value.toString());},
+      );
+  //   
  }
 ///////////////
     

@@ -352,10 +352,6 @@ List<Map<String, dynamic>> countriesdatalist=[];
   List<Map<String, dynamic>> niveauleveldatalist=[];
  List<Map<String, dynamic>> schooldatalist=[];
  List<Map<String, dynamic>> doctordatalist=[];
-<<<<<<< HEAD
-
-=======
->>>>>>> 1d10233c74af5e344dfd40d8a57908f0c9884482
 
     int licenceNumber;
      int licenceCodeOptionsid; 

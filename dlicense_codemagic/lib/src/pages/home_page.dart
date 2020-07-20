@@ -30,16 +30,16 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
-          Container(
-            padding: EdgeInsets.only(right: 10.0),
-            child: IconButton(
-              icon: Icon(Icons.settings_input_antenna),
-               onPressed: () { Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => RegisterUser()),
-              );},
-            ),
-          ),
+          // Container(
+          //   padding: EdgeInsets.only(right: 10.0),
+          //   child: IconButton(
+          //     icon: Icon(Icons.settings_input_antenna),
+          //      onPressed: () { Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => RegisterUser()),
+          //     );},
+          //   ),
+          // ),
           Container(
             padding: EdgeInsets.only(right: 10.0),
             child: IconButton(
